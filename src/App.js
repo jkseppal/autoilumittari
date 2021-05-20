@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Form, Col } from 'react-bootstrap'
-import Result from './Result'
+import MainForm from './components/MainForm'
+import Result from './components/Result'
 
 const App = () => {
   const [car, setCar] = useState(0)
@@ -66,117 +66,35 @@ const App = () => {
     <div>
       <h1>Autoilulaskuri</h1>
       <div className="container">
-      <p className="guide">
-        Tämä sovellus mahdollistaa kahden eri nopeuden vaikutuksen vertailun tietyllä matkalla.
-        Sovellus laskee matkaan käytetyn ajan kyseisellä nopeudella sekä matkaan vaadittavan polttoainemäärän.
-        Käyttäjä pääsee valitsemaan kolmesta eri autosta (polttoaineenkulutukset 3l / 100km, 3,5l / 100km ja 4l / 100km 1km/h nopeudella) sopivimman.
-        Jokaisen auton polttoaineenkulutus nousee 1,009 kertaiseksi nopeuden kasvaessa 1km/h.
-        Lisäksi käyttäjä pystyy syöttämään sovellukseen polttoaineen hinnan, jonka perusteella lasketaan nopeuden muutoksen taloudelliset vaikutukset.
-      </p>
-      <div className="form-alignment">
-      <Form className="form-border">
-        <Form.Row>
-          <Form.Group as={Col} controlId="carCheck">
-            <Form.Label as="legend" column sm={2}>
-              Auto:
-            </Form.Label>
-            <Col>
-              <Form.Check
-                inline
-                type="radio"
-                name="car"
-                label="A (3l / 100km)"
-                onChange={() => setCar(3)}
-              />
-              <Form.Check
-                inline
-                type="radio"
-                name="car"
-                label="B (3,5l / 100km)"
-                onChange={() => setCar(3.5)}
-              />
-              <Form.Check
-                inline
-                type="radio"
-                name="car"
-                label="C (4l / 100km)"
-                onChange={() => setCar(4)}
-              />
-            </Col>
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-        <Form.Group as={Col} controlId="distanceSelection">
-          <Form.Label>
-            Matka (km):
-          </Form.Label>
-          <Form.Control
-            className="select"
-            size="sm"
-            as="select"
-            value={distance}
-            onChange={handleDistanceChange}
-          >
-            {distanceOptions.map(d => (
-              <option key={d}>{d}</option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group as={Col} controlId="priceSelection">
-          <Form.Label>
-            polttoaineen hinta (€/l):
-          </Form.Label>
-          <Form.Control
-            className="select"
-            size="sm"
-            as="select"
-            value={price}
-            onChange={handlePriceChange}
-          >
-            {priceOptions.map(p => (
-              <option key={p}>{p}</option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} controlId="velocity1Selection">
-            <Form.Label>Nopeus 1 (km/h):</Form.Label>
-            <Form.Control
-              className="select"
-              size="sm"
-              as="select"
-              value={velocity1}
-              onChange={handleVelocity1Change}
-            >
-              {velocityOptions.map(v => (
-                <option key={v}>{v}</option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <Form.Group as={Col} controlId="velocity2Selection">
-            <Form.Label>Nopeus 2 (km/h):</Form.Label>
-            <Form.Control
-              className="select"
-              size="sm"
-              as="select"
-              value={velocity2}
-              onChange={handleVelocity2Change}
-            >
-              {velocityOptions.map(v => (
-                <option key={v}>{v}</option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-        </Form.Row>
-      </Form>
-      </div>
-      <Result car={car} velocity1={velocity1} velocity2={velocity2} timeInSeconds={timeInSeconds} fuelAmount={fuelAmount} fuelPrice={fuelPrice} price={price} />
-      <p className="guide">
-        HUOM!
-        Polttoaineenkulutukset ja niiden erotus näytetään kahden desimaalin tarkkuudella. Erotuksessa näytettävä määrä saattaa kuitenkin erota siitä, mikä erotus näyttäisi olevan itse laskemalla.
-        Tämä johtuu siitä, että erotus on laskettu tarkempien likiarvojen perusteella.
-      </p>
+        <p className="guide">
+          Tämä sovellus mahdollistaa kahden eri nopeuden vaikutuksen vertailun tietyllä matkalla.
+          Sovellus laskee matkaan käytetyn ajan kyseisellä nopeudella sekä matkaan vaadittavan polttoainemäärän.
+          Käyttäjä pääsee valitsemaan kolmesta eri autosta (polttoaineenkulutukset 3l / 100km, 3,5l / 100km ja 4l / 100km 1km/h nopeudella) sopivimman.
+          Jokaisen auton polttoaineenkulutus nousee 1,009 kertaiseksi nopeuden kasvaessa 1km/h.
+          Lisäksi käyttäjä pystyy syöttämään sovellukseen polttoaineen hinnan, jonka perusteella lasketaan nopeuden muutoksen taloudelliset vaikutukset.
+        </p>
+        <div className="form-alignment">
+          <MainForm
+            setCar={setCar} 
+            distance={distance}
+            velocity1={velocity1}
+            velocity2={velocity2}
+            price={price}
+            handleDistanceChange={handleDistanceChange}
+            handlePriceChange={handlePriceChange}
+            handleVelocity1Change={handleVelocity1Change}
+            handleVelocity2Change={handleVelocity2Change}
+            distanceOptions={distanceOptions}
+            velocityOptions={velocityOptions}
+            priceOptions={priceOptions}
+          />
+        </div>
+        <Result car={car} velocity1={velocity1} velocity2={velocity2} timeInSeconds={timeInSeconds} fuelAmount={fuelAmount} fuelPrice={fuelPrice} price={price} />
+        <p className="guide">
+          HUOM!
+          Polttoaineenkulutukset ja niiden erotus näytetään kahden desimaalin tarkkuudella. Erotuksessa näytettävä määrä saattaa kuitenkin erota siitä, mikä erotus näyttäisi olevan itse laskemalla.
+          Tämä johtuu siitä, että erotus on laskettu tarkempien likiarvojen perusteella.
+        </p>
       </div>
     </div>
   )
