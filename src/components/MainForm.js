@@ -1,7 +1,19 @@
 import React from 'react'
 import { Form, Col } from 'react-bootstrap'
 
-const MainForm = ({ setCar, distance, price, velocity1, velocity2, handleDistanceChange, handleVelocity1Change, handleVelocity2Change, handlePriceChange, distanceOptions, velocityOptions, priceOptions}) => {
+const MainForm = ({
+  setCar,
+  distance,
+  fuelPrice,
+  velocity1,
+  velocity2,
+  handleDistanceChange,
+  handleVelocity1Change,
+  handleVelocity2Change,
+  handleFuelPriceChange,
+  distanceOptions,
+  velocityOptions,
+  priceOptions }) => {
   return (
     <Form className="form-border">
             <Form.Row>
@@ -59,8 +71,8 @@ const MainForm = ({ setCar, distance, price, velocity1, velocity2, handleDistanc
                   className="select"
                   size="sm"
                   as="select"
-                  value={price}
-                  onChange={handlePriceChange}
+                  value={fuelPrice}
+                  onChange={handleFuelPriceChange}
                 >
                   {priceOptions.map(p => (
                     <option key={p}>{p}</option>

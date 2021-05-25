@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 
-const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPrice, price }) => {
+const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPrice, priceAmount }) => {
 
   let timeDifference = timeInSeconds(velocity1) - timeInSeconds(velocity2)
   if (timeDifference < 0) {
@@ -55,9 +55,9 @@ const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPric
           </tr>
           <tr>
             <td>Polttoaineen hinta</td>
-            <td>{(Math.round((fuelPrice(fuelAmount(velocity1), price) + Number.EPSILON) * 100) / 100).toFixed(2)} euroa</td>
-            <td>{(Math.round((fuelPrice(fuelAmount(velocity2), price) + Number.EPSILON) * 100) / 100).toFixed(2)} euroa</td>
-            <td>{(Math.round((fuelPrice(fuelDifference, price) + Number.EPSILON) *100) / 100).toFixed(2)} euroa</td>
+            <td>{(Math.round((priceAmount(fuelAmount(velocity1), fuelPrice) + Number.EPSILON) * 100) / 100).toFixed(2)} euroa</td>
+            <td>{(Math.round((priceAmount(fuelAmount(velocity2), fuelPrice) + Number.EPSILON) * 100) / 100).toFixed(2)} euroa</td>
+            <td>{(Math.round((priceAmount(fuelDifference, fuelPrice) + Number.EPSILON) *100) / 100).toFixed(2)} euroa</td>
           </tr>
         </tbody>
       </Table>

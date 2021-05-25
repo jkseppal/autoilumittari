@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import MainForm from './components/MainForm'
 import Result from './components/Result'
+import { Container, Row, Col } from 'react-bootstrap'
 
 const App = () => {
   const [car, setCar] = useState(0)
   const [distance, setDistance] = useState(1)
   const [velocity1, setVelocity1] = useState(1)
   const [velocity2, setVelocity2] = useState(1)
-  const [price, setPrice] = useState(1.00)
+  const [fuelPrice, setFuelPrice] = useState(1.00)
 
   const handleDistanceChange = (event) => {
     setDistance(event.target.value)
   }
 
-  const handlePriceChange = (event) => {
-    setPrice(event.target.value)
+  const handleFuelPriceChange = (event) => {
+    setFuelPrice(event.target.value)
   }
 
   const handleVelocity1Change = (event) => {
@@ -42,7 +43,7 @@ const App = () => {
     return economy * distance / 100
   }
 
-  const fuelPrice = (amount, price) => {
+  const priceAmount = (amount, price) => {
     return amount * price
   }
 
@@ -64,38 +65,58 @@ const App = () => {
 
   return (
     <div>
-      <h1>Autoilulaskuri</h1>
-      <div className="container">
-        <p className="guide">
-          Tämä sovellus mahdollistaa kahden eri nopeuden vaikutuksen vertailun tietyllä matkalla.
-          Sovellus laskee matkaan käytetyn ajan kyseisellä nopeudella sekä matkaan vaadittavan polttoainemäärän.
-          Käyttäjä pääsee valitsemaan kolmesta eri autosta (polttoaineenkulutukset 3l / 100km, 3,5l / 100km ja 4l / 100km 1km/h nopeudella) sopivimman.
-          Jokaisen auton polttoaineenkulutus nousee 1,009 kertaiseksi nopeuden kasvaessa 1km/h.
-          Lisäksi käyttäjä pystyy syöttämään sovellukseen polttoaineen hinnan, jonka perusteella lasketaan nopeuden muutoksen taloudelliset vaikutukset.
-        </p>
-        <div className="form-alignment">
-          <MainForm
-            setCar={setCar} 
-            distance={distance}
+      <h1><i>Autoilumittari</i></h1>
+      <Container>
+        <Row className="formRow">
+          <Col>
+            <MainForm
+              setCar={setCar} 
+              distance={distance}
+              velocity1={velocity1}
+              velocity2={velocity2}
+              fuelPrice={fuelPrice}
+              handleDistanceChange={handleDistanceChange}
+              handleFuelPriceChange={handleFuelPriceChange}
+              handleVelocity1Change={handleVelocity1Change}
+              handleVelocity2Change={handleVelocity2Change}
+              distanceOptions={distanceOptions}
+              velocityOptions={velocityOptions}
+              priceOptions={priceOptions}
+            />
+          </Col>
+          <Col>
+            <p className="guide">
+              Tämä sovellus mahdollistaa kahden eri nopeuden vaikutuksen vertailun tietyllä matkalla.
+              Sovellus laskee matkaan käytetyn ajan kyseisellä nopeudella sekä matkaan vaadittavan polttoainemäärän.
+              Käyttäjä pääsee valitsemaan kolmesta eri autosta (polttoaineenkulutukset 3l / 100km, 3,5l / 100km ja 4l / 100km 1km/h nopeudella) sopivimman.
+              Jokaisen auton polttoaineenkulutus nousee 1,009 kertaiseksi nopeuden kasvaessa 1km/h.
+              Lisäksi käyttäjä pystyy syöttämään sovellukseen polttoaineen hinnan, jonka perusteella lasketaan nopeuden muutoksen taloudelliset vaikutukset.
+            </p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <Result
+            car={car}
             velocity1={velocity1}
             velocity2={velocity2}
-            price={price}
-            handleDistanceChange={handleDistanceChange}
-            handlePriceChange={handlePriceChange}
-            handleVelocity1Change={handleVelocity1Change}
-            handleVelocity2Change={handleVelocity2Change}
-            distanceOptions={distanceOptions}
-            velocityOptions={velocityOptions}
-            priceOptions={priceOptions}
+            timeInSeconds={timeInSeconds}
+            fuelAmount={fuelAmount}
+            fuelPrice={fuelPrice}
+            priceAmount={priceAmount}
           />
-        </div>
-        <Result car={car} velocity1={velocity1} velocity2={velocity2} timeInSeconds={timeInSeconds} fuelAmount={fuelAmount} fuelPrice={fuelPrice} price={price} />
-        <p className="guide">
-          HUOM!
-          Polttoaineenkulutukset ja niiden erotus näytetään kahden desimaalin tarkkuudella. Erotuksessa näytettävä määrä saattaa kuitenkin erota siitä, mikä erotus näyttäisi olevan itse laskemalla.
-          Tämä johtuu siitä, että erotus on laskettu tarkempien likiarvojen perusteella.
-        </p>
-      </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <p className="notice">
+            HUOM!
+            Polttoaineenkulutukset ja niiden erotus näytetään kahden desimaalin tarkkuudella. Erotuksessa näytettävä määrä saattaa kuitenkin erota siitä, mikä erotus näyttäisi olevan itse laskemalla.
+            Tämä johtuu siitä, että erotus on laskettu tarkempien likiarvojen perusteella.
+          </p>
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }

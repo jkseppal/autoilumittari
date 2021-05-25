@@ -28,10 +28,12 @@ code {
 
 .request {
   color: rgb(255, 0, 0);
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .result {
-  padding-top: 10px;
+  padding-top: 20px;
   padding-right: 10%;
 }
 
@@ -43,7 +45,7 @@ code {
 }
 
 h1 {
-  font-family: 'Courier New';
+  font-family: 'Courier New', 'Courier';
   font-size: 70px;
   padding-top: 10px;
   padding-bottom: 15px;
@@ -53,7 +55,11 @@ h1 {
 }
 
 .guide {
-  font-size: 13px;
+  font-size: 15px;
+}
+
+.notice {
+  font-size: 12px;
   padding-right: 20%;
 }
 
@@ -62,4 +68,8 @@ h1 {
   border-width: 2px;
   border-color: rgb(162, 193, 231);
   background-color: rgb(255, 255, 255);
+}
+
+.formRow {
+  padding-top: 20px;
 }
