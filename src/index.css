@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color:rgb(0, 170, 23);
+  color:rgb(0, 133, 18);
 }
 
 code {
@@ -22,7 +22,7 @@ code {
 .form-border {
   padding: 5px;
   border-radius: 5px;
-  background-color: rgb(0, 127, 231);
+  background-color: rgb(0, 124, 226);
   color: rgb(255, 255, 255);
 }
 
@@ -41,16 +41,15 @@ code {
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0px 0px 0px 1px rgb(0, 140, 255);
-  color: rgb(0, 124, 226);
+  color: rgb(0, 133, 18);
 }
 
 h1 {
-  font-family: 'Courier New', 'Courier';
-  font-size: 70px;
-  padding-top: 10px;
-  padding-bottom: 15px;
+  font-family: 'Goudy Old Style', 'Garamond', 'Big Caslon', 'Times New Roman', serif;
+  font-size: 75px;
+  padding-bottom: 5px;
   padding-left: 100px;
-  background-color: rgb(0, 170, 23);
+  background-color: rgb(0, 133, 18);
   color:rgb(255, 255, 255);
 }
 
@@ -64,8 +63,9 @@ h1 {
 }
 
 .select {
-  border-style:ridge;
+  border-style: ridge;
   border-width: 2px;
+  border-radius: 5px;
   border-color: rgb(162, 193, 231);
   background-color: rgb(255, 255, 255);
 }

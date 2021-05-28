@@ -20,7 +20,7 @@ const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPric
     seconds %= 60
     return (`${hours} tuntia, ${minutes} minuuttia ja ${seconds} sekuntia`)
   }
-  
+
   if (car === 0) {
     return (
       <div className="request">

@@ -19,12 +19,10 @@ const App = () => {
   }
 
   const handleVelocity1Change = (event) => {
-    console.log('nopeutta muutettu, nopeus: ', velocity1)
     setVelocity1(event.target.value)
   }
 
   const handleVelocity2Change = (event) => {
-    console.log('nopeutta muutettu, nopeus: ', velocity2)
     setVelocity2(event.target.value)
   }
 
@@ -65,12 +63,12 @@ const App = () => {
 
   return (
     <div>
-      <h1><i>Autoilumittari</i></h1>
+      <h1>Autoilumittari</h1>
       <Container>
         <Row className="formRow">
           <Col>
             <MainForm
-              setCar={setCar} 
+              setCar={setCar}
               distance={distance}
               velocity1={velocity1}
               velocity2={velocity2}
@@ -96,24 +94,24 @@ const App = () => {
         </Row>
         <Row>
           <Col>
-          <Result
-            car={car}
-            velocity1={velocity1}
-            velocity2={velocity2}
-            timeInSeconds={timeInSeconds}
-            fuelAmount={fuelAmount}
-            fuelPrice={fuelPrice}
-            priceAmount={priceAmount}
-          />
+            <Result
+              car={car}
+              velocity1={velocity1}
+              velocity2={velocity2}
+              timeInSeconds={timeInSeconds}
+              fuelAmount={fuelAmount}
+              fuelPrice={fuelPrice}
+              priceAmount={priceAmount}
+            />
           </Col>
         </Row>
         <Row>
           <Col>
-          <p className="notice">
+            <p className="notice">
             HUOM!
             Polttoaineenkulutukset ja niiden erotus näytetään kahden desimaalin tarkkuudella. Erotuksessa näytettävä määrä saattaa kuitenkin erota siitä, mikä erotus näyttäisi olevan itse laskemalla.
             Tämä johtuu siitä, että erotus on laskettu tarkempien likiarvojen perusteella.
-          </p>
+            </p>
           </Col>
         </Row>
       </Container>
