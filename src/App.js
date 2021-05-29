@@ -34,10 +34,7 @@ const App = () => {
   }
 
   const fuelAmount = (velocity) => {
-    let economy = car
-    for (let i = 1; i < velocity; i++) {
-      economy *= 1.009
-    }
+    let economy = car * Math.pow(1.009, velocity - 1)
     return economy * distance / 100
   }
 

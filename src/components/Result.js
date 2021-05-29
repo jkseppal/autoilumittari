@@ -3,15 +3,10 @@ import { Table } from 'react-bootstrap'
 
 const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPrice, priceAmount }) => {
 
-  let timeDifference = timeInSeconds(velocity1) - timeInSeconds(velocity2)
-  if (timeDifference < 0) {
-    timeDifference *= -1
-  }
+  let timeDifference = Math.abs(timeInSeconds(velocity1) - timeInSeconds(velocity2))
 
-  let fuelDifference = Math.round((fuelAmount(velocity1) - fuelAmount(velocity2) + Number.EPSILON) * 100) / 100
-  if (fuelDifference < 0) {
-    fuelDifference *= -1
-  }
+  //With using Number.EPSILON we make sure, that rounding goes right with numbers like 1.005
+  let fuelDifference = Math.abs(Math.round((fuelAmount(velocity1) - fuelAmount(velocity2) + Number.EPSILON) * 100) / 100)
 
   const timeFormat = (seconds) => {
     const hours = Math.floor(seconds / 3600)
@@ -19,6 +14,10 @@ const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPric
     const minutes = Math.floor(seconds / 60)
     seconds %= 60
     return (`${hours} tuntia, ${minutes} minuuttia ja ${seconds} sekuntia`)
+  }
+
+  const priceCounter = (amount, price) => {
+    return (Math.round((priceAmount(amount, price) + Number.EPSILON) * 100) / 100).toFixed(2)
   }
 
   if (car === 0) {
@@ -55,9 +54,9 @@ const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPric
           </tr>
           <tr>
             <td>Polttoaineen hinta</td>
-            <td>{(Math.round((priceAmount(fuelAmount(velocity1), fuelPrice) + Number.EPSILON) * 100) / 100).toFixed(2)} euroa</td>
-            <td>{(Math.round((priceAmount(fuelAmount(velocity2), fuelPrice) + Number.EPSILON) * 100) / 100).toFixed(2)} euroa</td>
-            <td>{(Math.round((priceAmount(fuelDifference, fuelPrice) + Number.EPSILON) *100) / 100).toFixed(2)} euroa</td>
+            <td>{priceCounter(fuelAmount(velocity1), fuelPrice)} euroa</td>
+            <td>{priceCounter(fuelAmount(velocity2), fuelPrice)} euroa</td>
+            <td>{priceCounter(fuelDifference, fuelPrice)} euroa</td>
           </tr>
         </tbody>
       </Table>
