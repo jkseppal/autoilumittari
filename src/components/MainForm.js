@@ -27,6 +27,7 @@ const MainForm = ({
               type="radio"
               name="car"
               label="A (3l / 100km)"
+              defaultChecked
               onChange={() => setCar(3)}
             />
             <Form.Check

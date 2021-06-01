@@ -5,8 +5,7 @@ const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPric
 
   let timeDifference = Math.abs(timeInSeconds(velocity1) - timeInSeconds(velocity2))
 
-  //With using Number.EPSILON we make sure, that rounding goes right with numbers like 1.005
-  let fuelDifference = Math.abs(Math.round((fuelAmount(velocity1) - fuelAmount(velocity2) + Number.EPSILON) * 100) / 100)
+  let fuelDifference = Math.abs(fuelAmount(velocity1) - fuelAmount(velocity2))
 
   const timeFormat = (seconds) => {
     const hours = Math.floor(seconds / 3600)
@@ -16,10 +15,24 @@ const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPric
     return (`${hours} tuntia, ${minutes} minuuttia ja ${seconds} sekuntia`)
   }
 
+  //With using Number.EPSILON we make sure that rounding goes right with numbers like 1.005
   const priceCounter = (amount, price) => {
     return (Math.round((priceAmount(amount, price) + Number.EPSILON) * 100) / 100).toFixed(2)
   }
 
+  const fuelRounder = (amount) => {
+    return (Math.round((amount + Number.EPSILON) * 100) / 100)
+  }
+
+  const pricePerHour = (time, price) => {
+    if (time === 0) {
+      return null
+    }
+    const priceOfHour = (Math.round((price / (time / 3600) + Number.EPSILON) * 100) / 100).toFixed(2)
+    return `Säästetyn ajan hinta: ${priceOfHour} €/h`
+  }
+
+  //this should never happen
   if (car === 0) {
     return (
       <div className="request">
@@ -48,9 +61,9 @@ const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPric
           </tr>
           <tr>
             <td>Polttoaineen määrä</td>
-            <td>{Math.round((fuelAmount(velocity1) + Number.EPSILON) * 100) / 100} litraa</td>
-            <td>{Math.round((fuelAmount(velocity2) + Number.EPSILON) * 100) / 100} litraa</td>
-            <td>{fuelDifference} litraa</td>
+            <td>{fuelRounder(fuelAmount(velocity1))} litraa</td>
+            <td>{fuelRounder(fuelAmount(velocity2))} litraa</td>
+            <td>{fuelRounder(fuelDifference)} litraa</td>
           </tr>
           <tr>
             <td>Polttoaineen hinta</td>
@@ -60,6 +73,9 @@ const Result = ({ car, velocity1, velocity2, timeInSeconds, fuelAmount, fuelPric
           </tr>
         </tbody>
       </Table>
+      <div className="time-price">
+        {pricePerHour(timeDifference, priceCounter(fuelDifference, fuelPrice))}
+      </div>
     </div>
   )
 }

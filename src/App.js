@@ -4,7 +4,7 @@ import Result from './components/Result'
 import { Container, Row, Col } from 'react-bootstrap'
 
 const App = () => {
-  const [car, setCar] = useState(0)
+  const [car, setCar] = useState(3)
   const [distance, setDistance] = useState(1)
   const [velocity1, setVelocity1] = useState(1)
   const [velocity2, setVelocity2] = useState(1)
@@ -27,6 +27,7 @@ const App = () => {
   }
 
   const timeInSeconds = (velocity) => {
+    //should be always true
     if (velocity > 0) {
       const seconds = Math.ceil(distance / velocity * 3600)
       return seconds
